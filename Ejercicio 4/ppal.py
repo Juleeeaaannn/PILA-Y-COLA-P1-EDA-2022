@@ -1,26 +1,48 @@
-class Pila:
-    __items=[]
-    __tope=0
+from tkinter import Variable
+import numpy as np
+class Memoria:
+    __topesecu=0
+    __topesecu2=5
 
     def __init__(self):
-        self.__items=[]
+        self.__arreglo=np.empty(self.__topesecu2)
         
-    def Vacia(self):
-        return self.__items == []
+    def ApilaSecu(self,elemento):
+        if self.__topesecu < self.__topesecu2:
+            self.__arreglo[self.__topesecu]=elemento
+            self.__topesecu+=1
+        else:
+            print('error!!')
 
-    def Apilar(self,elemento):
-        self.__items.append(elemento)
-        self.__tope+=1
-
-    def Desapilar(self):
-        self.__tope-=1
-        return self.__items.pop()
-
+    def ApilaSecu2(self,elemento):
+        if self.__topesecu < self.__topesecu2:
+            self.__arreglo[self.__topesecu2-1]=elemento
+            self.__topesecu2-=1
+        else:
+            print('error!!')
+    def desapilaSecu(self):
+        self.__arreglo[self.__topesecu-1]=0
+        self.__topesecu-1
+    def desapilaSecu2(self):
+        self.__arreglo[self.__topesecu2]=0
+        self.__topesecu2+1
     def Mostrar(self):
-        variable=self.__tope
-        while(variable!=0):
-            print(self.__items[variable-1])
-            variable-=1
-
+        print(self.__arreglo)
 if __name__=='__main__':
-    pass
+    memoria1=Memoria()
+    i=-1
+    while(i!=0):
+        i=int(input('Ingrese elementos(finalizar con 0):'))
+        if(i!=0):
+            memoria1.ApilaSecu(i)
+    i=1
+    while(i!=0):
+        i=int(input('Ingrese elementos del segundo arreglo(finalizar con 0):'))
+        if(i!=0):
+            memoria1.ApilaSecu2(i)
+    memoria1.Mostrar()
+    memoria1.desapilaSecu()
+    memoria1.desapilaSecu2()
+    memoria1.Mostrar()
+    
+    
